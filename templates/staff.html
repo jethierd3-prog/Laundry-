@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block content %}
+<h1>Staff Accounts</h1><div class="card"><form method="post" action="{{url_for('save_staff')}}">
+<input name="full_name" placeholder="Full name" required><input name="username" placeholder="Username" required><input name="password" type="password" placeholder="Password (6+ characters)" required><button>Create Staff</button></form></div>
+<table><tr><th>Username</th><th>Name</th><th>Role</th><th>Created</th><th></th></tr>{% for u in users %}<tr><td>{{u.username}}</td><td>{{u.full_name}}</td><td>{{u.role}}</td><td>{{u.created_at}}</td><td>{% if u.id != session.get('user_id') %}<form method="post" action="{{url_for('delete_staff',user_id=u.id)}}"><button>Delete</button></form>{% endif %}</td></tr>{% endfor %}</table>{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block content %}
+<h1>Dashboard</h1>
+<div class="grid">
+<div class="card"><h3>Customers</h3><h2>{{ stats.customers }}</h2></div>
+<div class="card"><h3>Orders</h3><h2>{{ stats.orders }}</h2></div>
+<div class="card"><h3>Sales</h3><h2>{{ stats.sales|money }}</h2></div>
+<div class="card"><h3>Pending</h3><h2>{{ stats.pending or 0 }}</h2></div>
+</div>
+<div class="card"><a href="{{ url_for('new_order') }}">Create New Order</a></div>
+<div class="card"><h2>Recent Orders</h2>
+<table><tr><th>Order</th><th>Customer</th><th>Service</th><th>Status</th><th>Total</th></tr>
+{% for o in recent %}<tr><td><a href="{{ url_for('order_detail',order_id=o.id) }}">{{ o.order_code }}</a></td><td>{{ o.customer_name }}</td><td>{{ o.service_name }}</td><td>{{ o.status }}</td><td>{{ o.total_price|money }}</td></tr>{% else %}<tr><td colspan="5">No orders yet.</td></tr>{% endfor %}
+</table></div>{% endblock %}

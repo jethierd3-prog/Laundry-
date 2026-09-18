@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block content %}
+<div class="card"><h1>{{ customer.name }}</h1><p>{{ customer.phone }}</p><p>{{ customer.address }}</p>
+<a href="{{ url_for('edit_customer',customer_id=customer.id) }}">Edit Customer</a></div>
+<div class="card"><h2>Orders</h2><table><tr><th>Order</th><th>Service</th><th>Status</th><th>Total</th></tr>
+{% for o in orders %}<tr><td><a href="{{ url_for('order_detail',order_id=o.id) }}">{{ o.order_code }}</a></td><td>{{ o.service_name }}</td><td>{{ o.status }}</td><td>{{ o.total_price|money }}</td></tr>{% else %}<tr><td colspan="4">No orders.</td></tr>{% endfor %}</table></div>{% endblock %}

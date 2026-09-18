@@ -1,0 +1,2 @@
+{% extends "base.html" %}{% block content %}
+<div class="card"><h1>Receipt</h1><p><b>{{order.order_code}}</b></p><p>Customer: {{order.customer_name}}</p><p>Phone: {{order.phone}}</p><p>Service: {{order.service_name}}</p><p>Total: {{order.total_price|money}}</p><p>Paid: {{order.amount_paid|money}}</p><p>Balance: {{order.balance|money}}</p><p>Status: {{order.status}}</p></div>{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block content %}
+<div class="card"><h1>New Laundry Order</h1>
+<form method="post">
+<label>Customer</label><select name="customer_id" required>{% for c in customers %}<option value="{{c.id}}">{{c.name}} - {{c.phone}}</option>{% endfor %}</select>
+<label>Service</label><select name="service_id" required>{% for s in services %}<option value="{{s.id}}">{{s.name}} - {{s.price_per_kg|money}}/kg</option>{% endfor %}</select>
+<label>Weight (kg)</label><input name="weight" type="number" step="0.01" min="0" required>
+<label>Date received</label><input name="date_received" type="date" value="{{ today }}" required>
+<label>Expected pickup</label><input name="expected_pickup" type="date" value="{{ today }}" required>
+<label>Amount paid</label><input name="amount_paid" type="number" step="0.01" min="0" value="0">
+<label>Payment method</label><select name="payment_method">{% for p in ['Cash','GCash','Bank Transfer'] %}<option>{{p}}</option>{% endfor %}</select>
+<label>Notes</label><textarea name="notes"></textarea>
+<button>Create Order</button></form></div>{% endblock %}

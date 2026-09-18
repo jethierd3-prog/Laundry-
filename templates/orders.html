@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block content %}
+<h1>Orders</h1><div class="card">
+<form method="get" class="grid"><input name="q" value="{{ q }}" placeholder="Order, customer, phone">
+<select name="status"><option value="">All statuses</option>{% for s in statuses %}<option value="{{ s }}" {% if selected_status==s %}selected{% endif %}>{{ s }}</option>{% endfor %}</select>
+<select name="payment_status"><option value="">All payment statuses</option>{% for p in ['Unpaid','Partially Paid','Paid'] %}<option value="{{p}}" {% if selected_payment==p %}selected{% endif %}>{{p}}</option>{% endfor %}</select>
+<input type="date" name="date" value="{{ selected_date }}"><button>Filter</button></form>
+<a href="{{ url_for('new_order') }}">+ New Order</a></div>
+<table><tr><th>Order</th><th>Customer</th><th>Service</th><th>Status</th><th>Payment</th><th>Total</th></tr>
+{% for o in orders %}<tr><td><a href="{{ url_for('order_detail',order_id=o.id) }}">{{o.order_code}}</a></td><td>{{o.customer_name}}</td><td>{{o.service_name}}</td><td>{{o.status}}</td><td>{{o.payment_status}}</td><td>{{o.total_price|money}}</td></tr>{% else %}<tr><td colspan="6">No orders found.</td></tr>{% endfor %}</table>{% endblock %}
